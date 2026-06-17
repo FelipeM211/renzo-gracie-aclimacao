@@ -25,12 +25,12 @@ export default function Hero() {
           transition={{ duration: 0.8, ease }}
           className="max-w-3xl"
         >
-          <div className="inline-flex items-center gap-2 rounded-full border border-red-500/30 bg-red-500/10 px-4 py-1.5 text-sm font-bold text-red-500">
+          <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-1.5 text-sm font-bold text-blue-400">
             <Shield size={16} />
             <span>Jiu-Jitsu Renzo Gracie Aclimação</span>
           </div>
           <h1 className="mt-8 text-5xl font-black text-white md:text-7xl leading-[1.1]">
-            Treine na <span className="text-red-600">Fonte.</span><br />
+            Treine na <span className="text-blue-400">Fonte.</span><br />
             O Legado Gracie.
           </h1>
           <p className="mt-6 text-lg text-zinc-400 md:text-xl max-w-xl">

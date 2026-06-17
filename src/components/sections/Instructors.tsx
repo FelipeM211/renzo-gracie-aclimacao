@@ -52,7 +52,7 @@ export default function Instructors() {
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-zinc-950 via-transparent" />
                 <div className="absolute bottom-6 left-6">
-                  <span className="rounded-full bg-red-600 px-3 py-1 text-xs font-bold text-white">
+                  <span className="rounded-full bg-royal-blue px-3 py-1 text-xs font-bold text-white">
                     {prof.rank}
                   </span>
                   <h3 className="mt-2 text-2xl font-bold text-white">{prof.name}</h3>

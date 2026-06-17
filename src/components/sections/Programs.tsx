@@ -24,7 +24,7 @@ const programs = [
     title: "Jiu-Jitsu Adulto",
     description: "Do iniciante ao competidor, com a metodologia oficial da linhagem Renzo Gracie.",
     icon: Users,
-    accent: "border-red-500/20 bg-red-500/5 text-red-400",
+    accent: "border-blue-500/20 bg-blue-500/5 text-blue-400",
   },
 ] as const;
 
