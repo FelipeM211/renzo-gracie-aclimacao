@@ -1,5 +1,7 @@
-import { useEffect, useState, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+"use client";
+
+import { useEffect, useState, useCallback, useRef } from "react";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -84,6 +86,7 @@ const validateForm = (form: RegistrationForm): RegistrationFormErrors => {
 
 export default function Seminars() {
   const { toast } = useToast();
+  const initialMountRef = useRef(true);
 
   const [seminars, setSeminars] = useState<Seminar[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -123,8 +126,12 @@ export default function Seminars() {
   }, []);
 
   useEffect(() => {
-    fetchSeminars();
-  }, [fetchSeminars]);
+    if (initialMountRef.current) {
+      initialMountRef.current = false;
+      fetchSeminars();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const openRegistration = (seminar: Seminar) => {
     setSelectedSeminar(seminar);
@@ -181,10 +188,10 @@ export default function Seminars() {
         throw new Error(message);
       }
 
-      toast({
-        title: "Inscrição realizada com sucesso!",
-        description: `Você se inscreveu em "${selectedSeminar.title}".`,
-      });
+      toast(
+        "Inscrição realizada com sucesso!",
+        `Você se inscreveu em "${selectedSeminar.title}".`
+      );
 
       setModalOpen(false);
       setSelectedSeminar(null);
@@ -195,11 +202,7 @@ export default function Seminars() {
     } catch (err) {
       const message =
         err instanceof Error ? err.message : "Não foi possível concluir a inscrição.";
-      toast({
-        title: "Erro na inscrição",
-        description: message,
-        variant: "destructive",
-      });
+      toast("Erro na inscrição", message, "destructive");
     } finally {
       setSubmitting(false);
     }

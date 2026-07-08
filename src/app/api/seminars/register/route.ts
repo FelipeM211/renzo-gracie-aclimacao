@@ -46,7 +46,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (seminar._count.registrations >= seminar.maxCapacity) {
+    const effectiveCapacity = seminar.capacity ?? 0;
+
+    if (effectiveCapacity > 0 && seminar._count.registrations >= effectiveCapacity) {
       return NextResponse.json(
         {
           success: false,

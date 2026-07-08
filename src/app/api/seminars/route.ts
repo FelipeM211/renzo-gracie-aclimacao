@@ -1,6 +1,20 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 
+interface SeminarRecord {
+  id: string;
+  title: string;
+  description: string | null;
+  date: Date;
+  location: string;
+  capacity: number | null;
+  createdAt: Date;
+  updatedAt: Date;
+  _count: {
+    registrations: number;
+  };
+}
+
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
@@ -18,16 +32,16 @@ export async function GET() {
       },
     });
 
-    const result = seminars.map((seminar) => ({
+    const result = (seminars as SeminarRecord[]).map((seminar) => ({
       id: seminar.id,
       title: seminar.title,
-      description: seminar.description,
-      date: seminar.date,
+      description: seminar.description ?? '',
+      date: seminar.date.toISOString(),
       location: seminar.location,
-      capacity: seminar.capacity,
-      createdAt: seminar.createdAt,
-      updatedAt: seminar.updatedAt,
-      registrationsCount: seminar._count.registrations,
+      capacity: seminar.capacity ?? 0,
+      registered: seminar._count.registrations,
+      createdAt: seminar.createdAt.toISOString(),
+      updatedAt: seminar.updatedAt.toISOString(),
     }));
 
     return NextResponse.json(result, { status: 200 });
@@ -50,12 +64,18 @@ export async function POST(request: Request) {
       date,
       location,
       capacity,
+      instructorName,
+      instructorImage,
+      time,
     }: {
       title: string;
       description?: string;
       date: string;
       location: string;
       capacity?: number;
+      instructorName?: string;
+      instructorImage?: string;
+      time?: string;
     } = body;
 
     if (!title || !date || !location) {
@@ -68,8 +88,11 @@ export async function POST(request: Request) {
     const seminar = await prisma.seminar.create({
       data: {
         title,
+        instructorName: instructorName ?? 'Renzo Gracie Aclimação',
+        instructorImage: instructorImage ?? null,
         description,
         date: new Date(date),
+        time: time ?? null,
         location,
         capacity,
       },
