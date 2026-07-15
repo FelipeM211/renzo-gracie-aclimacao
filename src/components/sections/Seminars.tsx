@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 import { useEffect, useState, useCallback, useRef } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -290,12 +292,12 @@ export default function Seminars() {
           >
             <div className="relative h-48 w-full overflow-hidden bg-muted">
               {seminar.instructorImage ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
+                <Image
                   src={seminar.instructorImage}
                   alt={seminar.instructorName}
-                  className="h-full w-full object-cover"
-                  loading="lazy"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
               ) : (
                 <div className="flex h-full w-full items-center justify-center text-sm text-muted-foreground">
@@ -319,14 +321,28 @@ export default function Seminars() {
                   {formatDate(seminar.date)}
                   {seminar.time ? ` às ${seminar.time}` : ""}
                 </span>
-                <span>
-                  <span className="font-medium text-foreground">Local:</span> {location}
-                </span>
-              </div>
-
-              <p className="line-clamp-3 text-sm text-muted-foreground">
-                {seminar.description}
-              </p>
+                          <span>
+            <span className="font-medium text-foreground">Local:</span> {location}
+          </span>
+          {seminar.duration && (
+            <span>
+              <span className="font-medium text-foreground">Duração:</span> {seminar.duration}
+            </span>
+          )}
+          {seminar.level && (
+            <span>
+              <span className="font-medium text-foreground">Nível:</span> {seminar.level}
+            </span>
+          )}
+          {seminar.price !== null && seminar.price !== undefined && (
+            <span>
+              <span className="font-medium text-foreground">Valor:</span> R$ {seminar.price.toFixed(2)}
+            </span>
+          )}
+        </div>
+        <p className="line-clamp-3 text-sm text-muted-foreground">
+          {seminar.description}
+        </p>
 
               <div className="mt-1 flex items-center justify-between">
                 <span

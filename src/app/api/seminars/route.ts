@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { verifyAdminAuth } from '@/lib/auth-admin';
 
 interface SeminarRecord {
   id: string;
@@ -67,6 +68,13 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
+  if (!verifyAdminAuth()) {
+    return NextResponse.json(
+      { error: 'Não autorizado.' },
+      { status: 401 }
+    );
+  }
+
   try {
     const body = await request.json();
 

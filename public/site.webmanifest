@@ -1,0 +1,16 @@
+{
+  "name": "Renzo Gracie Aclimação",
+  "short_name": "RG Aclimação",
+  "description": "Jiu-Jitsu de Alto Nível em São Paulo",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ]
+}

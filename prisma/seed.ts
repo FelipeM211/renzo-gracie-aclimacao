@@ -18,7 +18,7 @@ async function main() {
     instructorName: 'Roberto Godoi',
     instructorImage: '/roberto-godoi.jpg',
     description: 'Uma oportunidade única de aprendizado com um dos grandes nomes do Jiu Jitsu!',
-    date: new Date('2026-08-01'),
+    date: new Date('2026-08-01T10:00:00-03:00'),
     time: '10:00',
     duration: '2 horas',
     level: 'Intermediário',
