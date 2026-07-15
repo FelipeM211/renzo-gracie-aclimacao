@@ -68,7 +68,7 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  if (!verifyAdminAuth()) {
+  if (!await verifyAdminAuth()) {
     return NextResponse.json(
       { error: 'Não autorizado.' },
       { status: 401 }

@@ -1,7 +1,7 @@
 import { headers } from 'next/headers'
 
-export function verifyAdminAuth(): boolean {
-  const headersList = headers()
+export async function verifyAdminAuth(): Promise<boolean> {
+  const headersList = await headers()
   const authHeader = headersList.get('authorization')
 
   if (!authHeader) return false
