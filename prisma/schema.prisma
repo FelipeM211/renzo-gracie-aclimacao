@@ -7,18 +7,21 @@ datasource db {
 }
 
 model Seminar {
-  id             String         @id @default(cuid())
-  title          String
-  instructorName String
+  id              String         @id @default(cuid())
+  title           String
+  instructorName  String
   instructorImage String?
-  description    String?
-  date           DateTime
-  time           String?
-  location       String
-  capacity       Int?
-  createdAt      DateTime       @default(now())
-  updatedAt      DateTime       @updatedAt
-  registrations  Registration[]
+  description     String?
+  date            DateTime
+  time            String?
+  duration        String?
+  level           String?
+  price           Float?
+  location        String
+  capacity        Int?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  registrations   Registration[]
 }
 
 model Registration {

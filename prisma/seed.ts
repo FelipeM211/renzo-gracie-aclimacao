@@ -12,43 +12,23 @@ async function main() {
   await prisma.registration.deleteMany()
   await prisma.seminar.deleteMany()
 
-  const seminars = await Promise.all([
-    prisma.seminar.create({
-      data: {
-        title: 'Introdução ao Jiu-Jitsu',
-        instructorName: 'Mestre Renzo',
-        description: 'Aprenda os fundamentos básicos do Jiu-Jitsu.',
-        date: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-        time: '10:00',
-        location: 'Renzo Gracie Aclimação',
-        capacity: 20,
-      },
-    }),
-    prisma.seminar.create({
-      data: {
-        title: 'Defesa Pessoal Feminina',
-        instructorName: 'Professora Ana Silva',
-        description: 'Técnicas práticas de proteção para mulheres.',
-        date: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000),
-        time: '14:00',
-        location: 'Renzo Gracie Aclimação',
-        capacity: 15,
-      },
-    }),
-    prisma.seminar.create({
-      data: {
-        title: 'Técnicas Avançadas de Passagem de Guarda',
-        instructorName: 'Mestre Thiago',
-        description: 'Seminário intensivo para nível intermediário.',
-        date: new Date(Date.now() + 21 * 24 * 60 * 60 * 1000),
-        time: '16:00',
-        location: 'Renzo Gracie Aclimação',
-        capacity: 25,
-      },
-    }),
-  ])
+  const seminar = await prisma.seminar.create({
+  data: {
+    title: 'Seminário Roberto Godoi',
+    instructorName: 'Roberto Godoi',
+    instructorImage: '/roberto-godoi.jpg',
+    description: 'Uma oportunidade única de aprendizado com um dos grandes nomes do Jiu Jitsu!',
+    date: new Date('2026-08-01'),
+    time: '10:00',
+    duration: '2 horas',
+    level: 'Intermediário',
+    price: 550.00,
+    location: 'Renzo Gracie Aclimação',
+    capacity: 25,
+  },
+})
 
-  console.log(`Created ${seminars.length} seminars`)
+  console.log(`Created seminar: ${seminar.title}`)
 }
 
 main()

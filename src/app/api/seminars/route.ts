@@ -4,8 +4,14 @@ import { prisma } from '@/lib/prisma';
 interface SeminarRecord {
   id: string;
   title: string;
+  instructorName: string;
+  instructorImage: string | null;
   description: string | null;
   date: Date;
+  time: string | null;
+  duration: string | null;
+  level: string | null;
+  price: number | null;
   location: string;
   capacity: number | null;
   createdAt: Date;
@@ -35,8 +41,14 @@ export async function GET() {
     const result = (seminars as SeminarRecord[]).map((seminar) => ({
       id: seminar.id,
       title: seminar.title,
+      instructorName: seminar.instructorName,
+      instructorImage: seminar.instructorImage,
       description: seminar.description ?? '',
       date: seminar.date.toISOString(),
+      time: seminar.time,
+      duration: seminar.duration,
+      level: seminar.level,
+      price: seminar.price,
       location: seminar.location,
       capacity: seminar.capacity ?? 0,
       registered: seminar._count.registrations,
@@ -67,6 +79,9 @@ export async function POST(request: Request) {
       instructorName,
       instructorImage,
       time,
+      duration,
+      level,
+      price,
     }: {
       title: string;
       description?: string;
@@ -76,6 +91,9 @@ export async function POST(request: Request) {
       instructorName?: string;
       instructorImage?: string;
       time?: string;
+      duration?: string;
+      level?: string;
+      price?: number;
     } = body;
 
     if (!title || !date || !location) {
@@ -93,6 +111,9 @@ export async function POST(request: Request) {
         description,
         date: new Date(date),
         time: time ?? null,
+        duration: duration ?? null,
+        level: level ?? null,
+        price: price ?? null,
         location,
         capacity,
       },

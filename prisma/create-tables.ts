@@ -8,6 +8,8 @@ const client = createClient({
 
 async function main() {
   const statements = [
+    `DROP TABLE IF EXISTS "Registration"`,
+    `DROP TABLE IF EXISTS "Seminar"`,
     `CREATE TABLE IF NOT EXISTS "Seminar" (
       "id" TEXT NOT NULL PRIMARY KEY,
       "title" TEXT NOT NULL,
@@ -16,6 +18,9 @@ async function main() {
       "description" TEXT,
       "date" DATETIME NOT NULL,
       "time" TEXT,
+      "duration" TEXT,
+      "level" TEXT,
+      "price" REAL,
       "location" TEXT NOT NULL,
       "capacity" INTEGER,
       "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -38,7 +43,7 @@ async function main() {
     await client.execute(stmt)
   }
 
-  console.log('✓ Tables created successfully!')
+  console.log('✓ Tables recreated successfully!')
 }
 
 main().catch(console.error)

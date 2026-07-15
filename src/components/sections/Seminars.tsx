@@ -20,11 +20,14 @@ interface Seminar {
   id: string;
   title: string;
   instructorName: string;
-  instructorImage: string;
+  instructorImage: string | null;
+  description: string | null;
   date: string;
-  time: string;
+  time: string | null;
+  duration: string | null;
+  level: string | null;
+  price: number | null;
   location: string;
-  description: string;
   capacity: number;
   registered: number;
 }
