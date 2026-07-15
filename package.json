@@ -8,7 +8,8 @@
     "postinstall": "prisma generate",
     "start": "next start",
     "lint": "eslint",
-    "seed": "node prisma/seed-direct.js",
+   "seed": "npx tsx --env-file=.env prisma/seed.ts",
+   "create-tables": "npx tsx prisma/create-tables.ts",
     "prisma:push": "prisma db push --url=\"file:./dev.db\""
   },
   "dependencies": {

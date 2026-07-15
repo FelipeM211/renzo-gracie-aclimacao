@@ -45,11 +45,13 @@ function subscribe(listener: () => void): () => void {
 }
 
 function getSnapshot(): Toast[] {
-  return toasts;
+  return toasts.length === 0 ? emptyToasts : toasts;
 }
 
-function getServerSnapshot(): Toast[] {
-  return [];
+const emptyToasts: Toast[] = []
+
+function getServerSnapshot() {
+  return emptyToasts
 }
 
 function createId(): string {
